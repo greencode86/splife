@@ -41,3 +41,4 @@ config/dispatcher.yml
 db/test/1/bin/riak
 .tags*
 .sass-cache.env
+.idea/*
