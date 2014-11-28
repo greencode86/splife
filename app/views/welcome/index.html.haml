@@ -1,0 +1,9 @@
+.jumbotron
+  .container
+    - if user_signed_in?
+      %h1 Welcome #{current_user.name}
+    - else
+      %h1 Hi!
+      %p I try to guide you through this app
+      %p
+        = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)

@@ -50,6 +50,12 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
+
+gem 'jquery-ui-rails'
+gem 'therubyracer'
+
 gem 'rails_12factor', group: :production
 
 group :development do

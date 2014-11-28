@@ -1,0 +1,99 @@
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %title splife
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+    %meta{:content => "", :name => "description"}
+    %meta{:content => "", :name => "author"}
+
+    / Le HTML5 shim, for IE6-8 support of HTML5 elements
+    /[if lt IE 9]
+      = javascript_include_tag "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"
+
+    = stylesheet_link_tag    "application", :media => "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          %button.navbar-toggle{:type => "button", :data => {:toggle => "collapse", :target => ".navbar-collapse"} }
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to "splife", root_path ,:class => "navbar-brand"
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+          -#  - if current_user && current_user.is_admin?
+          -#    %li.dropdown{:class => ("active" if params[:controller] == 'users' || params[:controller] == 'companies' || params[:controller] == 'medical_security_plan' || params[:controller] == 'labor_unions')}
+          -#      %a{"data-toggle" => "dropdown"}
+          -#        General
+          -#        %span.caret
+          -#      %ul.dropdown-menu{:role => "menu"}
+          -#        %li
+          -#          = link_to 'Usuarios', users_path
+          -#        %li
+          -#          = link_to 'Compañías', companies_path
+          -#        %li
+          -#          = link_to 'Obras Sociales y Prepagas', medical_security_plans_path
+          -#        %li
+          -#          = link_to 'Sindicatos', labor_unions_path
+          -#  - if current_user
+          -#    %li{:class => ("active" if params[:controller] == 'branches')}
+          -#      = link_to 'Sucursales', branches_path
+          -#    %li{:class => ("active" if params[:controller] == 'personal_data')}
+          -#      = link_to 'Contactos', personal_data_path
+          -#    %li.dropdown{:class => ("active" if params[:controller] == 'salaried_work' || params[:controller] == 'jobs')}
+          -#      %a{"data-toggle" => "dropdown"}
+          -#        Empleados
+          -#        %span.caret
+          -#      %ul.dropdown-menu{:role => "menu"}
+          -#        %li
+          -#          = link_to 'Rel. Dep.', salaried_works_path
+          -#        %li
+          -#          = link_to 'Tareas', jobs_path
+          -#    %li{:class => ("active" if params[:controller] == 'area')}
+          -#      = link_to 'Areas', areas_path
+          -#    %li{:class => ("active" if params[:controller] == 'cargo')}
+          -#      = link_to 'Cargos', positions_path
+          -#    %li.dropdown{:class => ("active" if params[:controller] == 'absences' || params[:controller] == 'licencia')}
+          -#      %a{"data-toggle" => "dropdown"}
+          -#        Presentismo
+          -#        %span.caret
+          -#      %ul.dropdown-menu{:role => "menu"}
+          -#        %li
+          -#          = link_to 'Partes diarios', absences_all_daily_presentism_path
+          -#        %li
+          -#          = link_to 'Licencias', licencia_path
+          -#        %li
+          -#          = link_to 'Reportes', dashboard_absences_path
+          -#    %li.dropdown{:class => ("active" if params[:controller] == 'campaigns')}
+          -#      %a{"data-toggle" => "dropdown"}
+          -#        Entrevistas
+          -#        %span.caret
+          -#      %ul.dropdown-menu{:role => "menu"}
+          -#        %li
+          -#          = link_to 'Campañas', campaigns_path
+          -#        %li
+          -#          = link_to 'Entrevistas', interviews_path
+          -#    %li.dropdown{:class => ("active" if params[:controller] == 'salary_item_types' || params[:controller] == 'salary_settlements')}
+          -#      %a{"data-toggle" => "dropdown"}
+          -#        Sueldos
+          -#        %span.caret
+          -#      %ul.dropdown-menu{:role => "menu"}
+          -#        %li
+          -#          = link_to 'Tipos de Items Sueldo', salary_item_types_path
+          -#        %li
+          -#          = link_to 'Sueldos', salary_settlements_path
+          -#        %li
+          -#          = link_to 'Reportes Comparativos', comparison_salary_settlements_path
+
+          - if current_user
+            = button_to 'Sign out', destroy_user_session_path, method: :delete, :class => 'btn btn-danger navbar-btn navbar-right '
+
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, :class => "alert alert-#{name == :error ? "danger" : "success" } alert-dismissable" do
+          %button.close{:type => "button", :data => {:dismiss => "alert"}, :aria => {:hidden => "true"} } &times;
+          = msg
+      = yield
